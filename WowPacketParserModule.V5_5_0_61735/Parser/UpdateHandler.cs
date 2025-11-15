@@ -40,7 +40,7 @@ namespace WowPacketParserModule.V5_5_0_61735.Parsers
         }
 
         [HasSniffData] // in ReadCreateObjectBlock
-        [Parser(Opcode.SMSG_UPDATE_OBJECT)]
+        [Parser(Opcode.SMSG_UPDATE_OBJECT, ClientBranch.MoP)]
         public static void HandleUpdateObject(Packet packet)
         {
             var updateObject = packet.Holder.UpdateObject = new();

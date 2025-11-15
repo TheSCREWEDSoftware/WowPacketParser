@@ -470,7 +470,7 @@ namespace WowPacketParserModule.V5_5_0_61735.Parsers
             ReadTalentInfoUpdate(packet, "Info");
         }
 
-        [Parser(Opcode.SMSG_UPDATE_TALENT_DATA_CLASSIC)]
+        [Parser(Opcode.SMSG_UPDATE_CLASSIC_TALENT_DATA)]
         public static void ReadUpdateTalentDataClassic(Packet packet)
         {
             ReadTalentInfoUpdateClassic(packet, "Info");
@@ -805,7 +805,7 @@ namespace WowPacketParserModule.V5_5_0_61735.Parsers
             packet.ReadByte("EffectIndex");
         }
 
-        [Parser(Opcode.SMSG_PET_SPELLS_MESSAGE)]
+        [Parser(Opcode.SMSG_PET_SPELLS_MESSAGE, ClientBranch.MoP)]
         public static void HandlePetSpells(Packet packet)
         {
             var petGuid = packet.ReadPackedGuid128("PetGUID");

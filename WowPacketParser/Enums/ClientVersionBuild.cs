@@ -634,6 +634,12 @@ namespace WowPacketParser.Enums
         V11_2_5_63660 = 63660,
         V11_2_5_63704 = 63704,
         V11_2_5_63796 = 63796,
+        V11_2_5_63825 = 63825,
+        V11_2_5_63834 = 63834,
+        V11_2_5_63906 = 63906,
+        V11_2_5_64154 = 64154,
+        V11_2_5_64270 = 64270,
+        V11_2_5_64395 = 64395,
 
         // Classic
         V1_13_2_31446 = 31446,
@@ -806,6 +812,11 @@ namespace WowPacketParser.Enums
         V1_15_7_62915 = 62915, // live
         V1_15_7_63306 = 63306, // live
         V1_15_7_63696 = 63696, // live
+
+        V1_15_8_63829 = 63829, // ptr and live
+        V1_15_8_64057 = 64057, // ptr and live
+        V1_15_8_64130 = 64130, // live
+        V1_15_8_64272 = 64272, // live
 
         // TBC Classic
         V2_5_1_38598 = 38598, // ptr
@@ -991,6 +1002,15 @@ namespace WowPacketParser.Enums
         V5_5_0_62422 = 62422, // both live and ptr
         V5_5_0_62518 = 62518, // live
         V5_5_0_62655 = 62655, // live
+        V5_5_0_62959 = 62959, // live
+
+        V5_5_1_63311 = 63311, // live
+        V5_5_1_63364 = 63364, // live
+        V5_5_1_63393 = 63393, // both live and ptr
+        V5_5_1_63421 = 63421, // both live and ptr
+        V5_5_1_63449 = 63449, // both live and ptr
+        V5_5_1_63538 = 63538, // both live and ptr
+        V5_5_1_63698 = 63698, // live
 
         // Battle.net - should probably not mix this but oh well
         BattleNetV37165 = 37165,

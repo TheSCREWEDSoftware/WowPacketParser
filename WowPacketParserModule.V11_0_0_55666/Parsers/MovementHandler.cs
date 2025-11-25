@@ -1,9 +1,9 @@
 ﻿using WowPacketParser.Enums;
 using WowPacketParser.Misc;
-using WowPacketParser.PacketStructures;
 using WowPacketParser.Parsing;
 using WowPacketParser.Proto;
 using WowPacketParserModule.V6_0_2_19033.Enums;
+using SplineFlag = WowPacketParserModule.V6_0_2_19033.Enums.SplineFlag;
 
 namespace WowPacketParserModule.V11_0_0_55666.Parsers
 {
@@ -107,7 +107,7 @@ namespace WowPacketParserModule.V11_0_0_55666.Parsers
             }
 
             if (hasSpellEffectExtraData)
-                V8_0_1_27101.Parsers.MovementHandler.ReadMonsterSplineSpellEffectExtraData(packet, indexes, "MonsterSplineSpellEffectExtra");
+                monsterMove.SpellEffect = V8_0_1_27101.Parsers.MovementHandler.ReadMonsterSplineSpellEffectExtraData(packet, indexes, "MonsterSplineSpellEffectExtra");
 
             if (hasJumpExtraData)
                 monsterMove.Jump = V8_0_1_27101.Parsers.MovementHandler.ReadMonsterSplineJumpExtraData(packet, indexes, "MonsterSplineJumpExtraData");
@@ -118,7 +118,7 @@ namespace WowPacketParserModule.V11_0_0_55666.Parsers
             if (hasAnimTier)
             {
                 packet.ReadInt32("TierTransitionID", indexes);
-                packet.ReadByte("AnimTier", indexes);
+                monsterMove.AnimTier = packet.ReadByte("AnimTier", indexes);
                 packet.ReadUInt32("StartTime", indexes);
                 packet.ReadUInt32("EndTime", indexes);
             }
@@ -135,10 +135,7 @@ namespace WowPacketParserModule.V11_0_0_55666.Parsers
             }
 
             if (endpos.X != 0 && endpos.Y != 0 && endpos.Z != 0)
-            {
-                packet.AddValue("Computed Distance", distance, indexes);
-                packet.AddValue("Computed Speed", (distance / monsterMove.MoveTime) * 1000, indexes);
-            }
+                WowPacketParser.Parsing.Parsers.MovementHandler.PrintComputedSplineMovementParams(packet, distance, monsterMove, indexes);
         }
 
         public static void ReadMovementMonsterSpline(Packet packet, Vector3 pos, WowGuid guid, params object[] indexes)

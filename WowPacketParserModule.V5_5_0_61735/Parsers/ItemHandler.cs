@@ -273,6 +273,144 @@ namespace WowPacketParserModule.V5_5_0_61735.Parsers
             packet.ReadInt32("ItemReforgeRecId");
         }
 
+        [Parser(Opcode.CMSG_MAKE_CONTITIONAL_APPEARANCE_PERMANENT)]
+        public static void HandleMakeContitionalAppearancePermanent(Packet packet)
+        {
+            packet.ReadInt32("ItemModifiedAppearanceID");
+        }
+
+        [Parser(Opcode.CMSG_USE_CRITTER_ITEM)]
+        public static void HandleUseCritterItem(Packet packet)
+        {
+            packet.ReadPackedGuid128("ItemGUID");
+        }
+
+        [Parser(Opcode.CMSG_DESTROY_ITEM)]
+        public static void HandleDestroyItem(Packet packet)
+        {
+            packet.ReadUInt32("Count");
+            packet.ReadByte("ContainerId");
+            packet.ReadByte("SlotNum");
+        }
+
+        [Parser(Opcode.CMSG_USE_ITEM)]
+        public static void HandleUseItem(Packet packet)
+        {
+            var useItem = packet.Holder.ClientUseItem = new();
+            useItem.PackSlot = packet.ReadByte("PackSlot");
+            useItem.ItemSlot = packet.ReadByte("Slot");
+            useItem.CastItem = packet.ReadPackedGuid128("CastItem");
+
+            useItem.SpellId = SpellHandler.ReadSpellCastRequest(packet, "Cast");
+        }
+
+        [Parser(Opcode.CMSG_ADD_TOY)]
+        public static void HandleAddToy(Packet packet)
+        {
+            packet.ReadPackedGuid128("Guid");
+        }
+
+        [Parser(Opcode.CMSG_USE_TOY)]
+        public static void HandleUseToy(Packet packet)
+        {
+            SpellHandler.ReadSpellCastRequest(packet, "Cast");
+        }
+
+        [Parser(Opcode.CMSG_ITEM_TEXT_QUERY)]
+        public static void HandleItemTextQuery(Packet packet)
+        {
+            packet.ReadPackedGuid128("ItemGUID");
+        }
+
+        [Parser(Opcode.CMSG_OPEN_ITEM)]
+        public static void HandleOpenItem(Packet packet)
+        {
+            packet.ReadByte("Slot");
+            packet.ReadByte("PackSlot");
+        }
+
+        [Parser(Opcode.CMSG_READ_ITEM)]
+        public static void HandleReadItem(Packet packet)
+        {
+            packet.ReadByte("PackSlot");
+            packet.ReadByte("Slot");
+        }
+
+        [Parser(Opcode.CMSG_SET_INSERT_ITEMS_LEFT_TO_RIGHT)]
+        public static void HandleSetInsertItemsLeftToRight(Packet packet)
+        {
+            packet.ReadBit("Enable");
+        }
+
+        [Parser(Opcode.CMSG_REMOVE_NEW_ITEM)]
+        public static void HandleRemoveNewItem(Packet packet)
+        {
+            packet.ReadPackedGuid128("ItemGUID");
+        }
+
+        [Parser(Opcode.CMSG_AZERITE_EMPOWERED_ITEM_VIEWED)]
+        public static void HandleItemAzerithEmpoweredItemViewed(Packet packet)
+        {
+            packet.ReadPackedGuid128("ItemGUID");
+        }
+
+        [Parser(Opcode.CMSG_AZERITE_EMPOWERED_ITEM_SELECT_POWER)]
+        public static void HandleItemAzerithEmpoweredItemSelectPower(Packet packet)
+        {
+            packet.ReadByte("ContainerSlot");
+            packet.ReadByte("Slot");
+            packet.ReadByte("AzeriteTier");
+            packet.ReadInt32("AzeritePowerID");
+        }
+
+        [Parser(Opcode.CMSG_SELL_ITEM)]
+        public static void HandleSellItem(Packet packet)
+        {
+            packet.ReadPackedGuid128("VendorGUID");
+            packet.ReadPackedGuid128("ItemGUID");
+
+            packet.ReadUInt32("Amount");
+        }
+
+        [Parser(Opcode.CMSG_BUY_ITEM)]
+        public static void HandleBuyItem(Packet packet)
+        {
+            packet.ReadPackedGuid128("VendorGUID");
+            packet.ReadPackedGuid128("ContainerGUID");
+
+            packet.ReadInt32("Quantity");
+            packet.ReadUInt32("Muid");
+            packet.ReadUInt32("Slot");
+            packet.ReadInt32("ItemType");
+
+            Substructures.ItemHandler.ReadItemInstance(packet, "ItemInstance");
+        }
+
+        [Parser(Opcode.CMSG_BUY_BACK_ITEM)]
+        public static void HandleBuyBackItem(Packet packet)
+        {
+            packet.ReadPackedGuid128("VendorGUID");
+            packet.ReadUInt32("Slot");
+        }
+
+        [Parser(Opcode.CMSG_SOCKET_GEMS)]
+        public static void HandleSocketGems(Packet packet)
+        {
+            packet.ReadPackedGuid128("GUID");
+            for (var i = 0; i < 3; ++i)
+                packet.ReadPackedGuid128("Gem GUID", i);
+        }
+
+        [Parser(Opcode.CMSG_REPAIR_ITEM)]
+        public static void HandleRepairItem(Packet packet)
+        {
+            packet.ReadPackedGuid128("NpcGUID");
+            packet.ReadPackedGuid128("ItemGUID");
+
+            packet.ResetBitReader();
+            packet.ReadBit("UseGuildBank");
+        }
+
         [Parser(Opcode.SMSG_INVENTORY_FULL_OVERFLOW)]
         [Parser(Opcode.SMSG_BAG_CLEANUP_FINISHED)]
         public static void HandleItemZero(Packet packet)

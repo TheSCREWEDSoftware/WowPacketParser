@@ -961,6 +961,83 @@ namespace WowPacketParserModule.V5_5_0_61735.Parsers
             packet.ReadPackedGuid128("PetitionGuid");
         }
 
+        [Parser(Opcode.CMSG_DECLINE_GUILD_INVITES)]
+        public static void HandleDeclineGuildInvites(Packet packet)
+        {
+            packet.ReadBit("Allow");
+        }
+
+        [Parser(Opcode.CMSG_SIGN_PETITION)]
+        public static void HandleSignPetition(Packet packet)
+        {
+            packet.ReadPackedGuid128("PetitionGUID");
+            packet.ReadByte("Choice");
+        }
+
+        [Parser(Opcode.CMSG_DECLINE_PETITION)]
+        public static void HandleDeclinePetition(Packet packet)
+        {
+            packet.ReadPackedGuid128("PetitionGUID");
+        }
+
+        [Parser(Opcode.CMSG_TURN_IN_PETITION)]
+        public static void HandleTurnInPetition(Packet packet)
+        {
+            packet.ReadPackedGuid128("PetitionGUID");
+            packet.ReadInt32("BgColorRGB");
+            packet.ReadInt32("IconStyle");
+            packet.ReadInt32("IconColorRGB");
+            packet.ReadInt32("BorderStyle");
+            packet.ReadInt32("BorderColorRGB");
+        }
+
+        [Parser(Opcode.CMSG_ACCEPT_GUILD_INVITE)]
+        public static void HandleAcceptGuildInvite441(Packet packet)
+        {
+            packet.ReadPackedGuid128("GuildGUID");
+        }
+
+        [Parser(Opcode.CMSG_GUILD_DECLINE_INVITATION)]
+        public static void HandleGuildDeclineInvitation(Packet packet)
+        {
+            packet.ReadPackedGuid128("GuildGUID");
+            packet.ReadBit("AutoDeclined"); // PlayerFlag 0x8000000
+        }
+
+        [Parser(Opcode.CMSG_GUILD_INVITE_BY_NAME)]
+        public static void HandleGuildInviteByName(Packet packet)
+        {
+            var nameLength = packet.ReadBits(9);
+            var hasArenaTeamId = packet.ReadBit("HasArenaTeamId");
+
+            packet.ReadWoWString("Name", nameLength);
+
+            if (hasArenaTeamId)
+                packet.ReadInt32("ArenaTeamId");
+        }
+
+        [Parser(Opcode.CMSG_QUERY_GUILD_INFO)]
+        public static void HandleGuildQuery(Packet packet)
+        {
+            packet.ReadPackedGuid128("GuildGUID");
+            packet.ReadPackedGuid128("PlayerGUID");
+        }
+
+        [Parser(Opcode.CMSG_GUILD_SET_GUILD_MASTER)]
+        public static void HandleGuildSetGuildMaster(Packet packet)
+        {
+            var nameLength = packet.ReadBits(9);
+            packet.ReadWoWString("NewMasterName", nameLength);
+        }
+
+        [Parser(Opcode.CMSG_PETITION_RENAME_GUILD)]
+        public static void HandlePetitionRenameGuild(Packet packet)
+        {
+            packet.ReadPackedGuid128("PetitionGuid");
+            var length = packet.ReadBits(7);
+            packet.ReadWoWString("Name", length);
+        }
+
         [Parser(Opcode.SMSG_GUILD_EVENT_BANK_CONTENTS_CHANGED)]
         [Parser(Opcode.SMSG_GUILD_EVENT_DISBANDED)]
         [Parser(Opcode.SMSG_GUILD_EVENT_RANKS_UPDATED)]

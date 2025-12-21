@@ -309,5 +309,16 @@ namespace WowPacketParserModule.V5_5_0_61735.Parsers
             for (var i = 0; i < count; ++i)
                 packet.ReadInt32("SpellVisualKitID", i);
         }
+
+        [Parser(Opcode.CMSG_UPDATE_AADC_STATUS)]
+        public static void HandleUpdateAADCStatus(Packet packet)
+        {
+            packet.ReadBit("ChatDisabled");
+        }
+
+        [Parser(Opcode.CMSG_EMOTE)]
+        public static void HandleChatNull(Packet packet)
+        {
+        }
     }
 }

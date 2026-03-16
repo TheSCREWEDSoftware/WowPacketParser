@@ -658,6 +658,31 @@ namespace WowPacketParser.Misc
             new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V11_2_7_64978, new DateTime(2025, 12, 19)),
             new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V11_2_7_65299, new DateTime(2026, 01, 10)),
 
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65459, new DateTime(2026, 01, 20)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65512, new DateTime(2026, 01, 21)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65535, new DateTime(2026, 01, 23)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65560, new DateTime(2026, 01, 24)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65614, new DateTime(2026, 01, 28)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65655, new DateTime(2026, 01, 30)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65699, new DateTime(2026, 02, 04)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_0_65727, new DateTime(2026, 02, 04, 21, 00, 00)),
+
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_65818, new DateTime(2026, 02, 10)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_65848, new DateTime(2026, 02, 11)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_65867, new DateTime(2026, 02, 11, 18, 26, 00)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_65893, new DateTime(2026, 02, 14)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_65940, new DateTime(2026, 02, 18)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66017, new DateTime(2026, 02, 19)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66044, new DateTime(2026, 02, 20)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66066, new DateTime(2026, 02, 25)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66102, new DateTime(2026, 02, 25, 19, 30, 00)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66192, new DateTime(2026, 02, 28, 20, 02, 02)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66198, new DateTime(2026, 03, 01)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66220, new DateTime(2026, 03, 04)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66263, new DateTime(2026, 03, 05)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66337, new DateTime(2026, 03, 10)),
+            new KeyValuePair<ClientVersionBuild, DateTime>(ClientVersionBuild.V12_0_1_66384, new DateTime(2026, 03, 14)),
+
             // no classic info, pkt contain build in header
         };
 
@@ -1306,6 +1331,27 @@ namespace WowPacketParser.Misc
                 case ClientVersionBuild.V12_0_0_65390:
                 case ClientVersionBuild.V12_0_0_65459:
                 case ClientVersionBuild.V12_0_0_65512:
+                case ClientVersionBuild.V12_0_0_65535:
+                case ClientVersionBuild.V12_0_0_65560:
+                case ClientVersionBuild.V12_0_0_65614:
+                case ClientVersionBuild.V12_0_0_65655:
+                case ClientVersionBuild.V12_0_0_65699:
+                case ClientVersionBuild.V12_0_0_65727:
+                case ClientVersionBuild.V12_0_1_65818:
+                case ClientVersionBuild.V12_0_1_65848:
+                case ClientVersionBuild.V12_0_1_65867:
+                case ClientVersionBuild.V12_0_1_65893:
+                case ClientVersionBuild.V12_0_1_65940:
+                case ClientVersionBuild.V12_0_1_66017:
+                case ClientVersionBuild.V12_0_1_66044:
+                case ClientVersionBuild.V12_0_1_66066:
+                case ClientVersionBuild.V12_0_1_66102:
+                case ClientVersionBuild.V12_0_1_66192:
+                case ClientVersionBuild.V12_0_1_66198:
+                case ClientVersionBuild.V12_0_1_66220:
+                case ClientVersionBuild.V12_0_1_66263:
+                case ClientVersionBuild.V12_0_1_66337:
+                case ClientVersionBuild.V12_0_1_66384:
                     return ClientVersionBuild.V12_0_0_65390;
                 //Classic
                 case ClientVersionBuild.V1_13_2_31446:
@@ -1644,6 +1690,13 @@ namespace WowPacketParser.Misc
                 case ClientVersionBuild.V5_5_2_64133:
                 case ClientVersionBuild.V5_5_2_64271:
                 case ClientVersionBuild.V5_5_2_64481:
+                case ClientVersionBuild.V5_5_3_64802:
+                case ClientVersionBuild.V5_5_3_64857:
+                case ClientVersionBuild.V5_5_3_65746:
+                case ClientVersionBuild.V5_5_3_65890:
+                case ClientVersionBuild.V5_5_3_65988:
+                case ClientVersionBuild.V5_5_3_66128:
+                case ClientVersionBuild.V5_5_3_66290:
                 case ClientVersionBuild.V1_15_8_63829:
                 case ClientVersionBuild.V1_15_8_64057:
                 case ClientVersionBuild.V1_15_8_64130:
@@ -2346,6 +2399,13 @@ namespace WowPacketParser.Misc
                 case ClientVersionBuild.V5_5_2_64133:
                 case ClientVersionBuild.V5_5_2_64271:
                 case ClientVersionBuild.V5_5_2_64481:
+                case ClientVersionBuild.V5_5_3_64802:
+                case ClientVersionBuild.V5_5_3_64857:
+                case ClientVersionBuild.V5_5_3_65746:
+                case ClientVersionBuild.V5_5_3_65890:
+                case ClientVersionBuild.V5_5_3_65988:
+                case ClientVersionBuild.V5_5_3_66128:
+                case ClientVersionBuild.V5_5_3_66290:
                     return true;
                 default:
                     return false;

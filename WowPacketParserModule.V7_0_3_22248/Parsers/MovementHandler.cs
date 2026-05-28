@@ -79,7 +79,8 @@ namespace WowPacketParserModule.V7_0_3_22248.Parsers
             monsterMove.ElapsedTime = packet.ReadInt32("Elapsed", indexes);
             monsterMove.MoveTime = packet.ReadUInt32("MoveTime", indexes);
             jump.Gravity = packet.ReadSingle("JumpGravity", indexes);
-            jump.Duration = packet.ReadUInt32("SpecialTime", indexes);
+            var specialTime = packet.ReadUInt32("SpecialTime", indexes);
+            jump.Duration = specialTime;
 
             packet.ReadByte("Mode", indexes);
             packet.ReadByte("VehicleExitVoluntary", indexes);
@@ -89,6 +90,9 @@ namespace WowPacketParserModule.V7_0_3_22248.Parsers
 
             if (monsterMove.Flags.HasFlag(UniversalSplineFlag.Animation))
                 monsterMove.AnimTier = animTier;
+
+            if (monsterMove.Flags.HasFlag(UniversalSplineFlag.FadeObject))
+                monsterMove.FadeObjectTime = specialTime;
 
             packet.ResetBitReader();
 
@@ -443,25 +447,16 @@ namespace WowPacketParserModule.V7_0_3_22248.Parsers
             phaseShift.PersonalGuid = packet.ReadPackedGuid128("PersonalGUID");
             for (var i = 0; i < count; ++i)
             {
-                var flags = packet.ReadUInt16E<PhaseFlags>("PhaseFlags", i);
-                var id = packet.ReadUInt16();
+                packet.ReadUInt16E<PhaseFlags>("PhaseFlags", i);
+                var id = packet.ReadUInt16<PhaseId>("ID", i);
                 phaseShift.Phases.Add(id);
-
-                if (Settings.UseDBC && DBC.Phase.ContainsKey(id))
-                {
-                    packet.WriteLine($"[{i}] ID: {id} ({(DBCPhaseFlags)DBC.Phase[id].Flags})");
-                }
-                else
-                    packet.AddValue("ID", id, i);
 
                 CoreParsers.MovementHandler.ActivePhases.Add(id, true);
             }
 
-            if (DBC.Phases.Any())
-            {
+            if (DBC.PhasesByGroup.Count != 0)
                 foreach (var phaseGroup in DBC.GetPhaseGroups(CoreParsers.MovementHandler.ActivePhases.Keys))
-                    packet.WriteLine($"PhaseGroup: { phaseGroup } Phases: { string.Join(" - ", DBC.Phases[phaseGroup]) }");
-            }
+                    packet.WriteLine($"PhaseGroup: {phaseGroup} Phases: {string.Join(" - ", DBC.PhasesByGroup[phaseGroup])}");
 
             var visibleMapIDsCount = packet.ReadInt32("VisibleMapIDsCount") / 2;
             for (var i = 0; i < visibleMapIDsCount; ++i)
